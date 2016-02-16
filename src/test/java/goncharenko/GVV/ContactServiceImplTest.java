@@ -1,6 +1,8 @@
 package goncharenko.GVV;
 
 import goncharenko.GVV.entity.Contact;
+import goncharenko.GVV.entity.ContactTelDetail;
+import goncharenko.GVV.entity.Hobby;
 import goncharenko.GVV.service.ContactService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -90,6 +92,30 @@ public class ContactServiceImplTest {
         contactService.delete(contact);
     }
 
+    @Test
+    public void findAllByNativeQuery() {
+        List<Contact> contacts = contactService.findAllByNativeQuery();
+        Assert.assertEquals(firstNameExpected, contacts.get(0).getFirstName());
+        Assert.assertEquals(lastNameExpected, contacts.get(0).getLastName());
+        listContacts(contacts);
+    }
+
+    @Test
+    public void findAllByNativeQuery2() {
+        List<Contact> contacts = contactService.findAllByNativeQuery2();
+        Assert.assertEquals(firstNameExpected, contacts.get(0).getFirstName());
+        Assert.assertEquals(lastNameExpected, contacts.get(0).getLastName());
+        listContacts(contacts);
+    }
+
+    @Test
+    public void findByCriteriaQuery(){
+        List<Contact> contacts = contactService.findByCriteriaQuery(firstNameExpected, lastNameExpected);
+        Assert.assertEquals(firstNameExpected, contacts.get(0).getFirstName());
+        Assert.assertEquals(lastNameExpected, contacts.get(0).getLastName());
+        listContactsWithDetail(contacts);
+    }
+
     private static void listContacts(List<Contact> contacts) {
         LOGGER.info("\nListing contacts without details:");
 
@@ -105,6 +131,24 @@ public class ContactServiceImplTest {
             LOGGER.info("\n" + contact);
             LOGGER.info("\n" + contact.getContactTelDetails());
             LOGGER.info("\n" + contact.getHobbies());
+        }
+    }
+
+    private static void listContactsWithDetail(List<Contact> contacts) {
+        LOGGER.info("\nListing contacts without details:");
+        for (Contact contact : contacts) {
+            LOGGER.info(contact.toString());
+            if (contact.getContactTelDetails() != null) {
+                for (ContactTelDetail contactTelDetail :
+                        contact.getContactTelDetails()) {
+                    LOGGER.info(contactTelDetail.toString());
+                }
+            }
+            if (contact.getHobbies() != null) {
+                for (Hobby hobby : contact.getHobbies()) {
+                    LOGGER.info(hobby.toString());
+                }
+            }
         }
     }
 }

@@ -10,7 +10,6 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
     <context:component-scan base-package="goncharenko.GVV"/>
-    <!--<tx:annotation-driven/>-->
 
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -36,7 +35,7 @@
         <property name="packagesToScan" value="goncharenko.GVV"/>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.max_fetch_depth">3</prop>
                 <prop key="hibernate.jdЬc.fetch_size">50</prop>
                 <prop key="hibernate.jdbc.batch_size">10</prop>

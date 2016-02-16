@@ -13,4 +13,8 @@ public interface ContactService {
     Contact findById(Long id);
     Contact save(Contact contact);
     void delete(Contact contact);
+    List<Contact> findAllByNativeQuery();
+    //using the mapping result set SQL
+    List<Contact> findAllByNativeQuery2();
+    List<Contact> findByCriteriaQuery(String firstName, String lastName);
 }

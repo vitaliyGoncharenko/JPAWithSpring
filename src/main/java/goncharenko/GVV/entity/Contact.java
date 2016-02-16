@@ -17,6 +17,11 @@ import java.util.Set;
         @NamedQuery(name = "Contact.findAllWithDetail",
                 query = "select distinct c from Contact c left join fetch c.contactTelDetails t left join fetch c.hobbies h")
 })
+
+@SqlResultSetMapping(
+        name = "contactResult",
+        entities = @EntityResult(entityClass = Contact.class)
+)
 public class Contact {
     private Long id;
     private String firstName;
